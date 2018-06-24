@@ -7,18 +7,40 @@ Class {
 	#instVars : [
 		'name',
 		'alignment',
-		'hitPoints'
+		'hitPoints',
+		'abilities'
+	],
+	#classInstVars : [
+		'abilities'
 	],
 	#category : #EverCraft
 }
 
 { #category : #'instance creation' }
 GameCharacter class >> new [
-	| new |
+	| new defaultAbilities |
 	new := super new.
+	defaultAbilities := Dictionary new.
+	defaultAbilities at: 'Strength' put: (Ability new score: 10).
+		defaultAbilities at: 'Dexterity' put: (Ability new score: 10).
+			defaultAbilities at: 'Constitution' put: (Ability new score: 10).
+				defaultAbilities at: 'Wisdom' put: (Ability new score: 10).
+					defaultAbilities at: 'Intelligence' put: (Ability new score: 10).
+						defaultAbilities at: 'Charisma' put: (Ability new score: 10).
+		
+	new abilities: defaultAbilities.
 	new hitPoints: 5.
-	^new.
-	
+	^ new
+]
+
+{ #category : #accessing }
+GameCharacter >> abilities [
+	^abilities
+]
+
+{ #category : #accessing }
+GameCharacter >> abilities: theAbilities [
+	abilities := theAbilities .
 ]
 
 { #category : #accessing }

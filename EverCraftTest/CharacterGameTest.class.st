@@ -5,7 +5,8 @@ Class {
 	#name : #CharacterGameTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'character'
+		'character',
+		'abilities'
 	],
 	#category : #EverCraftTest
 }
@@ -35,6 +36,17 @@ CharacterGameTest >> test_shouldHaveAnAlignment [
 	character alignment: 'Good'.
 	self assert: (character alignment = 'Good'). 
 
+]
+
+{ #category : #tests }
+CharacterGameTest >> test_shouldHaveDefaultAbilities [
+	abilities := character abilities.
+	self assert: (abilities at: 'Strength') score equals: 10.
+	self assert: (abilities at: 'Dexterity') score equals: 10.
+	self assert: (abilities at: 'Constitution') score equals: 10.
+	self assert: (abilities at: 'Wisdom') score equals: 10.
+	self assert: (abilities at: 'Intelligence') score equals: 10.
+	self assert: (abilities at: 'Charisma') score equals: 10
 ]
 
 { #category : #tests }
