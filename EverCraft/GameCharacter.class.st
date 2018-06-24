@@ -5,10 +5,21 @@ Class {
 	#name : #GameCharacter,
 	#superclass : #Object,
 	#instVars : [
-		'name'
+		'name',
+		'alignment'
 	],
 	#category : #EverCraft
 }
+
+{ #category : #accessing }
+GameCharacter >> alignment [
+	^alignment
+]
+
+{ #category : #accessing }
+GameCharacter >> alignment: anAlignment [
+	alignment := anAlignment 
+]
 
 { #category : #accessing }
 GameCharacter >> name [
