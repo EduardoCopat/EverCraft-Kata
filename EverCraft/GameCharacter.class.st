@@ -27,6 +27,12 @@ GameCharacter >> armorClass [
 ]
 
 { #category : #accessing }
+GameCharacter >> attacks: anEnemy withRoll: aRoll [
+	^aRoll >= anEnemy armorClass 
+
+]
+
+{ #category : #accessing }
 GameCharacter >> hitPoints [
 	^5
 ]
