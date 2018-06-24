@@ -22,11 +22,11 @@ GameCharacter class >> new [
 	new := super new.
 	defaultAbilities := Dictionary new.
 	defaultAbilities at: 'Strength' put: (Ability new score: 10).
-		defaultAbilities at: 'Dexterity' put: (Ability new score: 10).
-			defaultAbilities at: 'Constitution' put: (Ability new score: 10).
-				defaultAbilities at: 'Wisdom' put: (Ability new score: 10).
-					defaultAbilities at: 'Intelligence' put: (Ability new score: 10).
-						defaultAbilities at: 'Charisma' put: (Ability new score: 10).
+	defaultAbilities at: 'Dexterity' put: (Ability new score: 10).
+	defaultAbilities at: 'Constitution' put: (Ability new score: 10).
+	defaultAbilities at: 'Wisdom' put: (Ability new score: 10).
+	defaultAbilities at: 'Intelligence' put: (Ability new score: 10).
+	defaultAbilities at: 'Charisma' put: (Ability new score: 10).
 		
 	new abilities: defaultAbilities.
 	new hitPoints: 5.
@@ -60,13 +60,20 @@ GameCharacter >> armorClass [
 
 { #category : #combat }
 GameCharacter >> attacks: anEnemy withRoll: aRoll [
-	| hits damage |
-	hits := aRoll canHit: anEnemy armorClass.
+	| hits damage attackRoll	strengthModifier|
+	strengthModifier := (abilities at: 'Strength') modifier.
+	
+	attackRoll := aRoll + strengthModifier.
+	hits :=  attackRoll canHit: anEnemy armorClass.
+	
 	hits ifTrue: [ 
-		damage := 1.
+		damage := 1 + strengthModifier.
 		(aRoll isCritical) ifTrue: [ 
 			damage := damage * 2 ].
-		anEnemy damages: damage. 
+		
+		(damage > 0) 
+			ifTrue: [ anEnemy damages: damage ] 
+			ifFalse: [ anEnemy damages: 1 ].
 		].
 	^hits
 ]
