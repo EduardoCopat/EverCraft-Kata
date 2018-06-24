@@ -36,6 +36,18 @@ EverCraftCombatTest >> testAttackMeetingAC [
 ]
 
 { #category : #tests }
+EverCraftCombatTest >> testCriticalDoublesDamage [
+	| character enemy |
+	character := GameCharacter new.
+	enemy := GameCharacter new.
+	
+	character attacks: enemy withRoll: 20.
+	
+	self assert: ( enemy hitPoints ) equals: 3
+	
+]
+
+{ #category : #tests }
 EverCraftCombatTest >> testSuccesfulAttackHits [
 	| character enemy |
 	character := GameCharacter new.

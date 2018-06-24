@@ -36,15 +36,20 @@ GameCharacter >> armorClass [
 	^10
 ]
 
-{ #category : #accessing }
+{ #category : #combat }
 GameCharacter >> attacks: anEnemy withRoll: aRoll [
-	| hits |
-	hits := aRoll >= anEnemy armorClass.
-	hits ifTrue: [ anEnemy damages: 1 ].
+	| hits damage |
+	hits := aRoll canHit: anEnemy armorClass.
+	hits ifTrue: [ 
+		damage := 1.
+		(aRoll isCritical) ifTrue: [ 
+			damage := damage * 2 ].
+		anEnemy damages: damage. 
+		].
 	^hits
 ]
 
-{ #category : #accessing }
+{ #category : #combat }
 GameCharacter >> damages: aDamage [
 	hitPoints := hitPoints - aDamage
 ]
