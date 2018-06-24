@@ -34,3 +34,15 @@ EverCraftCombatTest >> testAttackMeetingAC [
 	
 	self assert: (character attacks: enemy withRoll: 10 ) equals: true
 ]
+
+{ #category : #tests }
+EverCraftCombatTest >> testSuccesfulAttackHits [
+	| character enemy |
+	character := GameCharacter new.
+	enemy := GameCharacter new.
+	
+	character attacks: enemy withRoll: 11.
+	
+	self assert: ( enemy hitPoints ) equals: 4
+	
+]

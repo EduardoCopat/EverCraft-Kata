@@ -6,10 +6,20 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'name',
-		'alignment'
+		'alignment',
+		'hitPoints'
 	],
 	#category : #EverCraft
 }
+
+{ #category : #'instance creation' }
+GameCharacter class >> new [
+	| new |
+	new := super new.
+	new hitPoints: 5.
+	^new.
+	
+]
 
 { #category : #accessing }
 GameCharacter >> alignment [
@@ -28,13 +38,25 @@ GameCharacter >> armorClass [
 
 { #category : #accessing }
 GameCharacter >> attacks: anEnemy withRoll: aRoll [
-	^aRoll >= anEnemy armorClass 
+	| hits |
+	hits := aRoll >= anEnemy armorClass.
+	hits ifTrue: [ anEnemy damages: 1 ].
+	^hits
+]
 
+{ #category : #accessing }
+GameCharacter >> damages: aDamage [
+	hitPoints := hitPoints - aDamage
 ]
 
 { #category : #accessing }
 GameCharacter >> hitPoints [
-	^5
+	^hitPoints 
+]
+
+{ #category : #accessing }
+GameCharacter >> hitPoints: aHitPoints [
+	hitPoints := aHitPoints 
 ]
 
 { #category : #accessing }
