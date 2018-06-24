@@ -22,6 +22,16 @@ GameCharacter >> alignment: anAlignment [
 ]
 
 { #category : #accessing }
+GameCharacter >> armorClass [
+	^10
+]
+
+{ #category : #accessing }
+GameCharacter >> hitPoints [
+	^5
+]
+
+{ #category : #accessing }
 GameCharacter >> name [
 	^name
 ]
