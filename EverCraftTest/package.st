@@ -1,1 +1,1 @@
-Package { #name : #UmTeste }
+Package { #name : #EverCraftTest }
