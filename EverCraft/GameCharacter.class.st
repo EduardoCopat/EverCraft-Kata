@@ -8,7 +8,8 @@ Class {
 		'name',
 		'alignment',
 		'hitPoints',
-		'abilities'
+		'abilities',
+		'armorClass'
 	],
 	#classInstVars : [
 		'abilities'
@@ -30,6 +31,7 @@ GameCharacter class >> new [
 		
 	new abilities: defaultAbilities.
 	new hitPoints: 5.
+	new armorClass: 10.
 	^ new
 ]
 
@@ -55,7 +57,14 @@ GameCharacter >> alignment: anAlignment [
 
 { #category : #accessing }
 GameCharacter >> armorClass [
-	^10
+	| dexterityModifier |
+	dexterityModifier := (abilities at: 'Dexterity') modifier.
+	^armorClass + dexterityModifier
+]
+
+{ #category : #accessing }
+GameCharacter >> armorClass: anArmorClass [
+	armorClass := anArmorClass 
 ]
 
 { #category : #combat }
@@ -85,7 +94,11 @@ GameCharacter >> damages: aDamage [
 
 { #category : #accessing }
 GameCharacter >> hitPoints [
-	^hitPoints 
+	| constitutionModifier |
+	constitutionModifier := (abilities at: 'Constitution') modifier.
+	^((hitPoints + constitutionModifier) > 0)
+		ifTrue: [ hitPoints + constitutionModifier ]
+		ifFalse: [ 1 ]
 ]
 
 { #category : #accessing }

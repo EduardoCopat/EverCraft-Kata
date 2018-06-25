@@ -17,6 +17,20 @@ CharacterGameTest >> setUp [
 ]
 
 { #category : #tests }
+CharacterGameTest >> test_shouldAddConModifierToHp [
+	(character abilities) at: 'Constitution' put: ((Ability new) score: 20).
+	self assert: (character hitPoints  = 10). 
+
+]
+
+{ #category : #tests }
+CharacterGameTest >> test_shouldAddDexModifierToAC [
+	(character abilities) at: 'Dexterity' put: ((Ability new) score: 20).
+	self assert: (character armorClass = 15). 
+
+]
+
+{ #category : #tests }
 CharacterGameTest >> test_shouldHaveADefaultArmorClass [
 	self assert: (character armorClass = 10). 
 
@@ -35,6 +49,13 @@ CharacterGameTest >> test_shouldHaveAnAlignment [
 
 	character alignment: 'Good'.
 	self assert: (character alignment = 'Good'). 
+
+]
+
+{ #category : #tests }
+CharacterGameTest >> test_shouldHaveAtLeast1HP [
+	(character abilities) at: 'Constitution' put: ((Ability new) score: 1).
+	self assert: (character hitPoints  = 1). 
 
 ]
 

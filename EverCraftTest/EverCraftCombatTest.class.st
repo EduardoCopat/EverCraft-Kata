@@ -21,6 +21,9 @@ EverCraftCombatTest >> setUp [
 
 { #category : #tests }
 EverCraftCombatTest >> testAddDexModifierToAC [
+	(enemy abilities) at: 'Dexterity' put: ((Ability new) score: 20).
+	
+	self assert: ( character attacks: enemy withRoll: 10 ) equals: false
 	
 ]
 
